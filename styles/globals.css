@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input {
+  @apply border-2 border-neutral-400 rounded-md px-1
+}
+input:focus{
+  @apply border-neutral-400
+}
