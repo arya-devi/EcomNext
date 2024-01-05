@@ -1,9 +1,11 @@
 import Layout from "@/components/Layout";
+import ProductForm from "@/components/ProductForm";
 
-export default function NewProduct(){
-    return(
-        <Layout>
-            <input type="text" placeholder="product name"/>
-        </Layout>
-    )
+export default function NewProduct() {
+  return (
+    <Layout>
+        <h1>Add New Product</h1>
+      <ProductForm />
+    </Layout>
+  );
 }
