@@ -6,11 +6,11 @@ export default function Home() {
   console.log({session});
  return(
   <Layout>
-    <div className="text-gray-800 flex justify-between">
+    <div className="text-slate-800 bg-slate-300 flex justify-between">
       <h2>
         Hello, <b>{session?.user?.name}</b>
         </h2>
-      <div className="flex bg-indigo-200 text-black gap-1 rounded-lg  overflow-hidden">
+      <div className="flex bg-slate-800 text-slate-400 gap-1 rounded-lg  overflow-hidden">
       <img src={session?.user?.image} alt="" className="w-6 h-6" />
       <span className="px-2">
       {session?.user?.name}

@@ -1,30 +1,26 @@
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Logo from "./Logo";
 
-export default function Nav() {
+export default function Nav({show}) {
   const inactiveLink = "flex gap-1 p-1";
-  const activeLink = inactiveLink + " bg-indigo-100 text-gray-800 rounded-l-lg";
+  const activeLink = inactiveLink + " bg-slate-700 text-slate-200 rounded-md";
+  const inactiveIcon ='w-6 h-6'
+  const activeIcon = inactiveIcon + ' fill-white'
   const router = useRouter();
   const { pathname } = router;
+ async function logOut(){
+   await router.push('/')
+   await signOut()
+
+  }
   return (
-    <aside className="p-4 text-white pr-0 font-mono">
-      <Link href={"/"} className="flex gap-1 mb-4 mr-4">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-6 h-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"
-          />
-        </svg>
-        <span className="">Ecommerce_Admin</span>
-      </Link>
+       <aside className={(show?'left-0':'-left-full')+" top-0 p-4 text-slate-800 font-mono fixed w-full bg-slate-400 h-full md:static md:w-auto transition-all"}>
+      <div className="mb-4 mr-4"> 
+      <Logo/>
+      </div>
+      
       <nav className="flex flex-col gap-2">
         <Link
           href={"/"}
@@ -36,7 +32,7 @@ export default function Nav() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className={pathname === "/" ? activeIcon : inactiveIcon}
           >
             <path
               strokeLinecap="round"
@@ -57,7 +53,7 @@ export default function Nav() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className={pathname.includes("/products") ? activeIcon : inactiveIcon}
           >
             <path
               strokeLinecap="round"
@@ -69,7 +65,9 @@ export default function Nav() {
         </Link>
         <Link
           href={"/categories"}
-          className={pathname.includes("/categories") ? activeLink : inactiveLink}
+          className={
+            pathname.includes("/categories") ? activeLink : inactiveLink
+          }
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +75,7 @@ export default function Nav() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className={pathname.includes("/categories") ? activeIcon : inactiveIcon}
           >
             <path
               strokeLinecap="round"
@@ -97,7 +95,7 @@ export default function Nav() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className={pathname.includes("/orders") ? activeIcon : inactiveIcon}
           >
             <path
               strokeLinecap="round"
@@ -117,7 +115,7 @@ export default function Nav() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className={pathname.includes("/settings") ? activeIcon : inactiveIcon}
           >
             <path
               strokeLinecap="round"
@@ -132,6 +130,23 @@ export default function Nav() {
           </svg>
           Settings
         </Link>
+        <button onClick={logOut} className={inactiveLink}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
+            />
+          </svg>
+          Logout
+        </button>
       </nav>
     </aside>
   );
