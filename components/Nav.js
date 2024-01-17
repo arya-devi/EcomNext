@@ -2,12 +2,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function Nav() {
-    const inactiveLink = 'flex gap-1 p-1'
-    const activeLink = inactiveLink+' bg-indigo-100 text-gray-800 rounded-l-lg'
-    const router = useRouter()
-    const { pathname } = router;
+  const inactiveLink = "flex gap-1 p-1";
+  const activeLink = inactiveLink + " bg-indigo-100 text-gray-800 rounded-l-lg";
+  const router = useRouter();
+  const { pathname } = router;
   return (
-    <aside className="p-4 text-white pr-0">
+    <aside className="p-4 text-white pr-0 font-mono">
       <Link href={"/"} className="flex gap-1 mb-4 mr-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,10 @@ export default function Nav() {
         <span className="">Ecommerce_Admin</span>
       </Link>
       <nav className="flex flex-col gap-2">
-        <Link href={"/"} className={pathname === '/' ? activeLink : inactiveLink}>
+        <Link
+          href={"/"}
+          className={pathname === "/" ? activeLink : inactiveLink}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -43,8 +46,11 @@ export default function Nav() {
           </svg>
           Dashboard
         </Link>
-       
-        <Link href={"/products"} className={pathname.includes('/products') ? activeLink : inactiveLink}>
+
+        <Link
+          href={"/products"}
+          className={pathname.includes("/products") ? activeLink : inactiveLink}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -61,7 +67,30 @@ export default function Nav() {
           </svg>
           Products
         </Link>
-        <Link href={"/orders"} className={pathname.includes('/orders') ? activeLink : inactiveLink}>
+        <Link
+          href={"/categories"}
+          className={pathname.includes("/categories") ? activeLink : inactiveLink}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15.042 21.672 13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-.672ZM12 2.25V4.5m5.834.166-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243-1.59-1.59"
+            />
+          </svg>
+          Categories
+        </Link>
+        <Link
+          href={"/orders"}
+          className={pathname.includes("/orders") ? activeLink : inactiveLink}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -78,7 +107,10 @@ export default function Nav() {
           </svg>
           Orders
         </Link>
-        <Link href={"/settings"} className={pathname.includes('/settings') ? activeLink : inactiveLink}>
+        <Link
+          href={"/settings"}
+          className={pathname.includes("/settings") ? activeLink : inactiveLink}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

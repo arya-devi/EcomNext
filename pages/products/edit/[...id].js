@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
 import ProductForm from "@/components/ProductForm";
+import { data } from "autoprefixer";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
