@@ -11,12 +11,14 @@ export default function ProductForm({
   price: existingPrice,
   images: existingImage,
   category: assignedCategory,
-  properties:assignedProperties,
+  properties: assignedProperties,
 }) {
   const [title, setTitle] = useState(existingTitle || "");
   const [description, setDescription] = useState(existingDescription || "");
   const [category, setCategory] = useState(assignedCategory || "");
-  const [productProperties, setProductProperties] = useState(assignedProperties || {});
+  const [productProperties, setProductProperties] = useState(
+    assignedProperties || {}
+  );
   const [price, setPrice] = useState(existingPrice || "");
   const [goToProduct, setGoToProduct] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
@@ -31,8 +33,14 @@ export default function ProductForm({
 
   async function saveProduct(ev) {
     ev.preventDefault();
-    const data = { title, description, price, images, category, 
-      properties:productProperties };
+    const data = {
+      title,
+      description,
+      price,
+      images,
+      category,
+      properties: productProperties,
+    };
     //update
     if (_id) {
       await axios.put("/api/products", { ...data, _id });
@@ -98,20 +106,26 @@ export default function ProductForm({
       <select value={category} onChange={(ev) => setCategory(ev.target.value)}>
         <option value="">Uncategorized</option>
         {categories.length > 0 &&
-          categories.map((c) => <option value={c._id}>{c.name}</option>)}
+          categories.map((c) =>
+           <option key={c._id} value={c._id}>{c.name}</option>)}
+          
       </select>
       {propertiesToFill.length > 0 &&
-        propertiesToFill.map((p) => (
-          <div className="">
+        propertiesToFill.map((p, index) => (
+          <div key={`property-${index}`} className="">
             <label>{p.name}</label>
             <div>
-            <select value={productProperties[p.name]} onChange={(ev) => setProductProp(p.name, ev.target.value)}>
-              {p.values.map((v) => (
-                <option value={v}>{v}</option>
-              ))}
-            </select>
+              <select
+                value={productProperties[p.name]}
+                onChange={(ev) => setProductProp(p.name, ev.target.value)}
+              >
+                {p.values.map((v) => (
+                  <option  key={`property-${p.name}-${v}`}value={v}>
+                    {v}
+                  </option>
+                ))}
+              </select>
             </div>
-            
           </div>
         ))}
       <label>Photos</label>
@@ -123,7 +137,10 @@ export default function ProductForm({
         >
           {!!images?.length &&
             images.map((link) => (
-              <div key={link} className="h-24 p-2 bg-slate-200 shadow-md  rounded-md">
+              <div
+                key={link}
+                className="h-24 p-2 bg-slate-200 shadow-md  rounded-md"
+              >
                 <img src={link} alt="" className="rounded-lg" />
               </div>
             ))}

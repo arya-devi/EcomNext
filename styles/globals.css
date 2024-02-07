@@ -26,10 +26,14 @@ label{
 table.basic{
   @apply w-full text-white rounded-sm shadow-xl
 }
-table.basic thead tr td{
+table.basic thead tr td,
+table.basic thead tr th
+{
   @apply bg-slate-700 text-slate-200 uppercase
 }
-table.basic tr td{
+table.basic tr td,
+table.basic tr th 
+{
   @apply border border-slate-400 p-2 bg-slate-300 text-slate-900 font-mono
 }
 table.basic a{

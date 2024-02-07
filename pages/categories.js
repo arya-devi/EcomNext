@@ -207,7 +207,7 @@ function Categories({ swal }) {
                 <tr key={category._id}>
                   <td>{category.name}</td>
                   <td>{category?.parent?.name}</td>
-                  <td>
+                  <td className="flex gap-1 ">
                     <button
                       onClick={() => editCategory(category)}
                       className="btn-primary mr-1"
